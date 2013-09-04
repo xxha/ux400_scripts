@@ -1,0 +1,62 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BUF_SIZE	bucheck.c	23;"	d	file:
+DISPLAY_DEV	bucheck.c	25;"	d	file:
+UX400_100GE	bucheck.c	7;"	d	file:
+UX400_10G	bucheck.c	6;"	d	file:
+UX400_16G	bucheck.c	12;"	d	file:
+UX400_1GE	bucheck.c	10;"	d	file:
+UX400_2P5G	bucheck.c	8;"	d	file:
+UX400_40G	bucheck.c	9;"	d	file:
+UX400_40GE	bucheck.c	11;"	d	file:
+UX400_LA_PATH	bucheck.c	15;"	d	file:
+UX400_LB_PATH	bucheck.c	16;"	d	file:
+UX400_LC_PATH	bucheck.c	17;"	d	file:
+UX400_RA_PATH	bucheck.c	18;"	d	file:
+UX400_RB_PATH	bucheck.c	19;"	d	file:
+UX400_RC_PATH	bucheck.c	20;"	d	file:
+compare_dir	old_sh/vercmp300.dat	/^compare_dir()$/;"	f
+compare_dir	old_sh/vercmpux400.sh	/^compare_dir()$/;"	f
+compare_dir	vercmp_ux400.sh	/^compare_dir()$/;"	f
+do_check	old_sh/vercmp300.dat	/^do_check()$/;"	f
+do_check	old_sh/vercmpux400.sh	/^do_check()$/;"	f
+do_check	vercmp_ux400.sh	/^do_check()$/;"	f
+do_cpy	old_sh/vercmp300.dat	/^do_cpy()$/;"	f
+do_cpy	old_sh/vercmpux400.sh	/^do_cpy()$/;"	f
+do_cpy	vercmp_ux400.sh	/^do_cpy()$/;"	f
+do_uncompress	old_sh/vercmp300.dat	/^do_uncompress()$/;"	f
+do_uncompress	old_sh/vercmpux400.sh	/^do_uncompress()$/;"	f
+do_uncompress	vercmp_ux400.sh	/^do_uncompress()$/;"	f
+err_check	old_sh/vercmp300.dat	/^err_check()$/;"	f
+err_check	old_sh/vercmpux400.sh	/^err_check()$/;"	f
+err_check	upgrade_ux400.sh	/^err_check()$/;"	f
+err_check	vercmp_ux400.sh	/^err_check()$/;"	f
+file_check	old_sh/vercmp300.dat	/^file_check()$/;"	f
+file_check	old_sh/vercmpux400.sh	/^file_check()$/;"	f
+file_check	vercmp_ux400.sh	/^file_check()$/;"	f
+file_checknew	old_sh/vercmp300.dat	/^file_checknew()$/;"	f
+file_checknew	old_sh/vercmpux400.sh	/^file_checknew()$/;"	f
+file_checknew	vercmp_ux400.sh	/^file_checknew()$/;"	f
+file_checkrm	old_sh/vercmp300.dat	/^file_checkrm()$/;"	f
+file_checkrm	old_sh/vercmpux400.sh	/^file_checkrm()$/;"	f
+file_checkrm	vercmp_ux400.sh	/^file_checkrm()$/;"	f
+file_checkrm_new	old_sh/vercmp300.dat	/^file_checkrm_new()$/;"	f
+file_checkrm_new	old_sh/vercmpux400.sh	/^file_checkrm_new()$/;"	f
+file_checkrm_new	vercmp_ux400.sh	/^file_checkrm_new()$/;"	f
+jffs_cpy	old_sh/vercmp300.dat	/^jffs_cpy()$/;"	f
+jffs_cpy	old_sh/vercmpux400.sh	/^jffs_cpy()$/;"	f
+jffs_cpy	vercmp_ux400.sh	/^jffs_cpy()$/;"	f
+main	bucheck.c	/^int main(int argc,char *argv[])$/;"	f
+md5_check	old_sh/vercmp300.dat	/^md5_check()$/;"	f
+md5_check	old_sh/vercmpux400.sh	/^md5_check()$/;"	f
+md5_check	upgrade_ux400.sh	/^md5_check()$/;"	f
+md5_check	vercmp_ux400.sh	/^md5_check()$/;"	f
+rm_files	upgrade_ux400.sh	/^rm_files()$/;"	f
+verusage	old_sh/vercmp300.dat	/^verusage()$/;"	f
+verusage	old_sh/vercmpux400.sh	/^verusage()$/;"	f
+verusage	upgrade_ux400.sh	/^verusage()$/;"	f
+verusage	vercmp_ux400.sh	/^verusage()$/;"	f
