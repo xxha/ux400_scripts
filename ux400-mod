@@ -133,6 +133,7 @@ function mupgrade()
 {
         mdevcheck $1
         usbdev="$?"
+	sdup="0"
 	if [ "$usbdev" == "$USB0" ]; then
 		modconfig usb0 192.168.250.2 128.0.0.2 255.255.255.252 128.0.0.1
 		if [ $? -ne 0 ]; then
@@ -149,6 +150,10 @@ function mupgrade()
 				return 3
 			fi
 		fi
+		if [ -f /resv/v400/usb0sdup.log ]; then
+			grep -r "SUCCESS" /resv/v400/usb0sdup.log
+			sdup="$?"
+		fi
         elif [ "$usbdev" == "$USB1" ]; then
                 modconfig usb1 192.168.250.2 128.0.0.6 255.255.255.252 128.0.0.5
 		if [ $? -ne 0 ]; then
@@ -163,6 +168,10 @@ function mupgrade()
                                 sleep 600
 				return 3
 			fi
+		fi
+		if [ -f /resv/v400/usb1sdup.log ]; then
+			grep -r "SUCCESS" /resv/v400/usb1sdup.log
+			sdup="$?"
 		fi
         elif [ "$usbdev" == "$USB2" ]; then
                 modconfig usb2 192.168.250.2 128.0.0.10 255.255.255.252 128.0.0.9
@@ -180,6 +189,10 @@ function mupgrade()
                                 return 3
                         fi
 		fi
+		if [ -f /resv/v400/usb2sdup.log ]; then
+			grep -r "SUCCESS" /resv/v400/usb2sdup.log
+			sdup="$?"
+		fi
         elif [ "$usbdev" == "$USB3" ]; then
                 modconfig usb3 192.168.250.2 128.0.0.14 255.255.255.252 128.0.0.13
 		if [ $? -ne 0 ]; then
@@ -195,6 +208,10 @@ function mupgrade()
                                 sleep 600
                                 return 3
                         fi
+		fi
+		if [ -f /resv/v400/usb3sdup.log ]; then
+			grep -r "SUCCESS" /resv/v400/usb3sdup.log
+			sdup="$?"
 		fi
         elif [ "$usbdev" == "$USB4" ]; then
                 modconfig usb4 192.168.250.2 128.0.0.18 255.255.255.252 128.0.0.17
@@ -212,6 +229,10 @@ function mupgrade()
                                 return 3
                         fi
 		fi
+		if [ -f /resv/v400/usb4sdup.log ]; then
+			grep -r "SUCCESS" /resv/v400/usb4sdup.log
+			sdup="$?"
+		fi
         elif [ "$usbdev" == "$USB5" ]; then
                 modconfig usb5 192.168.250.2 128.0.0.22 255.255.255.252 128.0.0.21
 		if [ $? -ne 0 ]; then
@@ -228,6 +249,10 @@ function mupgrade()
                                 return 3
                         fi
 		fi
+		if [ -f /resv/v400/usb5sdup.log ]; then
+			grep -r "SUCCESS" /resv/v400/usb5sdup.log
+			sdup="$?"
+		fi
 	else
 #		echo -e "Unsupport USB device" > ${display_dev}
 		return 0
@@ -238,11 +263,13 @@ function mupgrade()
 	update="$?"
 	echo -ne "    \r" > ${display_dev}
 
+
 	if [ $update -eq 0 ]; then
-#		echo -n "The module on slot " > ${display_dev}
-#		echo -n $1 > ${display_dev}
-#		echo -e " has last software, don't need upgrade\r" > ${display_dev}
-		return 0
+		if [ $sdup -eq 0 ]; then
+			return 0
+		else
+			echo -n "SD card need upgrade" > ${display_dev}
+		fi
 	fi
 	
 	mtype $1
