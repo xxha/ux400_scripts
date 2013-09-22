@@ -122,7 +122,6 @@ function modconfig()
         return 0
 }
 
-sdup="0"
 
 function configip()
 {
@@ -144,10 +143,6 @@ function configip()
 				return 3
 			fi
 		fi
-		if [ -f /resv/v400/$1sdup.log ]; then
-			grep -r "SUCCESS" /resv/v400/$1sdup.log
-			sdup="$?"
-		fi
         elif [ "$usbdev" == "$USB1" ]; then
                 modconfig usb1 192.168.250.2 128.0.0.6 255.255.255.252 128.0.0.5
 		if [ $? -ne 0 ]; then
@@ -162,10 +157,6 @@ function configip()
                                 sleep 60
 				return 3
 			fi
-		fi
-		if [ -f /resv/v400/$1sdup.log ]; then
-			grep -r "SUCCESS" /resv/v400/$1sdup.log
-			sdup="$?"
 		fi
         elif [ "$usbdev" == "$USB2" ]; then
                 modconfig usb2 192.168.250.2 128.0.0.10 255.255.255.252 128.0.0.9
@@ -183,10 +174,6 @@ function configip()
                                 return 3
                         fi
 		fi
-		if [ -f /resv/v400/$1sdup.log ]; then
-			grep -r "SUCCESS" /resv/v400/$1sdup.log
-			sdup="$?"
-		fi
         elif [ "$usbdev" == "$USB3" ]; then
                 modconfig usb3 192.168.250.2 128.0.0.14 255.255.255.252 128.0.0.13
 		if [ $? -ne 0 ]; then
@@ -202,10 +189,6 @@ function configip()
                                 sleep 60
                                 return 3
                         fi
-		fi
-		if [ -f /resv/v400/$1sdup.log ]; then
-			grep -r "SUCCESS" /resv/v400/$1sdup.log
-			sdup="$?"
 		fi
         elif [ "$usbdev" == "$USB4" ]; then
                 modconfig usb4 192.168.250.2 128.0.0.18 255.255.255.252 128.0.0.17
@@ -223,10 +206,6 @@ function configip()
                                 return 3
                         fi
 		fi
-		if [ -f /resv/v400/$1sdup.log ]; then
-			grep -r "SUCCESS" /resv/v400/$1sdup.log
-			sdup="$?"
-		fi
         elif [ "$usbdev" == "$USB5" ]; then
                 modconfig usb5 192.168.250.2 128.0.0.22 255.255.255.252 128.0.0.21
 		if [ $? -ne 0 ]; then
@@ -242,10 +221,6 @@ function configip()
                                 sleep 60
                                 return 3
                         fi
-		fi
-		if [ -f /resv/v400/$1sdup.log ]; then
-			grep -r "SUCCESS" /resv/v400/$1sdup.log
-			sdup="$?"
 		fi
 	else
 #		echo -e "Unsupport USB device" > ${display_dev}
@@ -265,6 +240,11 @@ function mupgrade()
 
 
 	if [ $update -eq 0 ]; then
+		local sdup="0"
+		if [ -f /resv/v400/$1sdup.log ]; then
+			grep -r "SUCCESS" /resv/v400/$1sdup.log
+			sdup="$?"
+		fi
 		if [ $sdup -eq 0 ]; then
 			return 0
 		else
@@ -428,7 +408,6 @@ function mupgrade()
 		fi
 
 		/usr/bin/modud 128.0.0.2 128.0.0.1 $udport
-		#/usr/bin/modup 128.0.0.2 128.0.0.1 $imagename > /resv/v400/usb0fup.log
 		sleep 5
 		/usr/bin/client 128.0.0.2 $udport 128.0.0.1 $imagename $boardname /resv/v400/$1fup.log $locate > ${display_dev}
 		grep -r "SUCCESS" /resv/v400/$1fup.log
@@ -441,7 +420,6 @@ function mupgrade()
 			/sbin/ux400cset
 			return 3
 	 	else
-                        #if [ -f /resv/v400/ux400-module-sd.tar.gz ]; then
 		        if [ -f /usr/local/$boardname/share/ux400-module-sd.tar.gz ]; then
 				echo "Test Module $1: Flash upgrade done, find module SD card image, upgrade SD card." > ${display_dev}
 				rm -rf /resv/v400/$1sdup.log
@@ -473,7 +451,6 @@ function mupgrade()
                 fi
 
 		/usr/bin/modud 128.0.0.6 128.0.0.5 $udport
-		#/usr/bin/modup 128.0.0.6 128.0.0.5 $imagename > /resv/v400/usb1fup.log
 		sleep 5
 		/usr/bin/client 128.0.0.6 $udport 128.0.0.5 $imagename $boardname /resv/v400/$1fup.log $locate > ${display_dev}
 		grep -r "SUCCESS" /resv/v400/$1fup.log
@@ -486,7 +463,6 @@ function mupgrade()
 			return 3
 			/sbin/ux400cset
 	  	else
-                        #if [ -f /resv/v400/ux400-module-sd.tar.gz ]; then
 		        if [ -f /usr/local/$boardname/share/ux400-module-sd.tar.gz ]; then
                                 echo "Test Module $1: Flash upgrade done, find module SD card image, upgrade SD card." > ${display_dev}
 				rm -rf /resv/v400/$1sdup.log
@@ -518,7 +494,6 @@ function mupgrade()
                 fi
 
 		/usr/bin/modud 128.0.0.10 128.0.0.9 $udport
-		#/usr/bin/modup 128.0.0.10 128.0.0.9 $imagename > /resv/v400/usb2fup.log
 		sleep 5
 		/usr/bin/client 128.0.0.10 $udport 128.0.0.9 $imagename $boardname /resv/v400/$1fup.log $locate > ${display_dev}
 		grep -r "SUCCESS" /resv/v400/$1fup.log
@@ -531,7 +506,6 @@ function mupgrade()
 			/sbin/ux400cset
 			return 3
 	  	else
-                        #if [ -f /resv/v400/ux400-module-sd.tar.gz ]; then
 		        if [ -f /usr/local/$boardname/share/ux400-module-sd.tar.gz ]; then
                                 echo "Test Module $1: Flash upgrade done, find module SD card image, upgrade SD card." > ${display_dev}
 				rm -rf /resv/v400/$1sdup.log
@@ -563,7 +537,6 @@ function mupgrade()
                 fi
 
 		/usr/bin/modud 128.0.0.14 128.0.0.13 $udport
-		#/usr/bin/modup 128.0.0.14 128.0.0.13 $imagename > /resv/v400/usb3fup.log
 		sleep 5
 		/usr/bin/client 128.0.0.14 $udport 128.0.0.13 $imagename $boardname /resv/v400/$1fup.log $locate > ${display_dev}
 		grep -r "SUCCESS" /resv/v400/$1fup.log
@@ -576,7 +549,6 @@ function mupgrade()
 			/sbin/ux400cset
 			return 3
 	  	else
-                        #if [ -f /resv/v400/ux400-module-sd.tar.gz ]; then
 		        if [ -f /usr/local/$boardname/share/ux400-module-sd.tar.gz ]; then
                                 echo "Test Module $1: Flash upgrade done, find module SD card image, upgrade SD card." > ${display_dev}
 				rm -rf /resv/v400/$1sdup.log
@@ -608,7 +580,6 @@ function mupgrade()
                 fi
 
 		/usr/bin/modud 128.0.0.18 128.0.0.17 $udport
-		#/usr/bin/modup 128.0.0.18 128.0.0.17 $imagename > /resv/v400/usb4fup.log
 		sleep 5
 		/usr/bin/client 128.0.0.18 $udport 128.0.0.17 $imagename $bardname /resv/v400/$1fup.log $locate > ${display_dev}
 		grep -r "SUCCESS" /resv/v400/$1fup.log
@@ -621,7 +592,6 @@ function mupgrade()
 			/sbin/ux400cset
 			return 3
 	  	else
-                        #if [ -f /resv/v400/ux400-module-sd.tar.gz ]; then
 		        if [ -f /usr/local/$boardname/share/ux400-module-sd.tar.gz ]; then
 				rm -rf /resv/v400/$1sdup.log
                                 echo "Test Module $1: Flash upgrade done, find module SD card image, upgrade SD card." > ${display_dev}
@@ -652,7 +622,6 @@ function mupgrade()
 			modconfig usb5 192.168.250.2 128.0.0.22 255.255.255.252 128.0.0.21
                 fi
 		/usr/bin/modud 128.0.0.22 128.0.0.21 $udport
-		#/usr/bin/modup 128.0.0.22 128.0.0.21 $imagename > /resv/v400/usb5fup.log
 		sleep 5
 		/usr/bin/client 128.0.0.22 $udport 128.0.0.21 $imagename $boardname /resv/v400/$1fup.log $locate > ${display_dev}
 		grep -r "SUCCESS" /resv/v400/$1fup.log
@@ -665,7 +634,6 @@ function mupgrade()
 			/sbin/ux400cset
 			return 3
 	  	else
-                        #if [ -f /resv/v400/ux400-module-sd.tar.gz ]; then
 		        if [ -f /usr/local/$boardname/share/ux400-module-sd.tar.gz ]; then
                                 echo "Test Module $1: Flash upgrade done, find module SD card image, upgrade SD card." > ${display_dev}
 				rm -rf /resv/v400/$1sdup.log
@@ -774,7 +742,7 @@ if [ $ifupgrade -gt 2 ]; then
         ux400buzz 1
         sleep 0.3
         ux400buzz 0
-        sleep 10
+        sleep 100000
         halt
 fi
 
