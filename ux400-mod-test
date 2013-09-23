@@ -131,7 +131,6 @@ isusb () {
 	return 1
 }
 
-
 function configip()
 {
         mdevcheck $1
@@ -145,7 +144,7 @@ function configip()
 		local x86_ip="128.0.0.$host"
 		local arm_ip="128.0.0.$sub"
 		local usb_eth="usb$usbx"
-		echo "$1: $usb_eth, x86_ip=$x86_ip, arm_ip=$arm_ip" > ${display_dev}
+#		echo "$1: $usb_eth, x86_ip=$x86_ip, arm_ip=$arm_ip" > ${display_dev}
 		modconfig $usb_eth 192.168.250.2 $arm_ip 255.255.255.252 $x86_ip
 		if [ $? -ne 0 ]; then
 			/usr/bin/ux400gpio $1 0
@@ -161,7 +160,7 @@ function configip()
 		fi
 
 	else
-		echo -e "$1: Unsupport USB device" > ${display_dev}
+		echo -e "$1: Unsupport USB device"
 	fi
 }
 
@@ -320,7 +319,7 @@ function mupgrade()
 		return 3
 	fi
 
-	echo "$1: $machine, $imagename, $machinename, $boardname" > ${display_dev}
+#	echo "$1: $machine, $imagename, $machinename, $boardname" > ${display_dev}
 
         cp -rf /usr/bin/mdarms /resv/v400/
         cp -rf /usr/bin/kill-mods /resv/v400/
@@ -346,7 +345,7 @@ function mupgrade()
 		local x86_ip="128.0.0.$host"
 		local arm_ip="128.0.0.$sub"
 		local usb_eth="usb$usbx"
-		echo "$1: usb$usbx, x86_ip=$x86_ip, arm_ip=$arm_ip" > ${display_dev}
+#		echo "$1: $usb_eth, x86_ip=$x86_ip, arm_ip=$arm_ip" > ${display_dev}
 
 		rm -rf /resv/v400/$1fup.log
 		ping $arm_ip -c 1
@@ -391,7 +390,7 @@ function mupgrade()
 			return 1
 	  	fi
 	else
-		echo -e "Unsupport USB device" > ${display_dev}
+		echo -e "Unsupport USB device"
 	fi
 }
 
@@ -428,7 +427,6 @@ function multiup()
 }
 
 ###################################################################
-
 
 start vsftpd
 
