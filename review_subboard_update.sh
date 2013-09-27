@@ -17,7 +17,7 @@ if [ -f /tmp/ux400-local-10g.tar.gz ]; then
 
 	tar -xf ux400-local-$sub_board.tar.gz
 	if [ $? -eq "0" ]; then
-		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt
+		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt > /dev/null 2>&1
 		if [ $? -ne "0" ]; then
 			echo "$sub_board version different, need upgrade."
 			rm -rf /usr/local/$sub_board
@@ -39,7 +39,7 @@ if [ -f /tmp/ux400-local-2p5g.tar.gz ]; then
 
 	tar -xf ux400-local-$sub_board.tar.gz
 	if [ $? -eq "0" ]; then
-		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt
+		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt > /dev/null 2>&1
 		if [ $? -ne "0" ]; then
 			echo "$sub_board version different, need upgrade."
 			rm -rf /usr/local/$sub_board
@@ -60,7 +60,7 @@ if [ -f /tmp/ux400-local-1ge.tar.gz ]; then
 
 	tar -xf ux400-local-$sub_board.tar.gz
 	if [ $? -eq "0" ]; then
-		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt
+		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt > /dev/null 2>&1
 		if [ $? -ne "0" ]; then
 			echo "$sub_board version different, need upgrade."
 			rm -rf /usr/local/$sub_board
@@ -81,7 +81,7 @@ if [ -f /tmp/ux400-local-40g.tar.gz ]; then
 
 	tar -xf ux400-local-$sub_board.tar.gz
 	if [ $? -eq "0" ]; then
-		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt
+		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt > /dev/null 2>&1
 		if [ $? -ne "0" ]; then
 			echo "$sub_board version different, need upgrade."
 			rm -rf /usr/local/$sub_board
@@ -102,7 +102,7 @@ if [ -f /tmp/ux400-local-16g.tar.gz ]; then
 
 	tar -xf ux400-local-$sub_board.tar.gz
 	if [ $? -eq "0" ]; then
-		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt
+		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt > /dev/null 2>&1
 		if [ $? -ne "0" ]; then
 			echo "$sub_board version different, need upgrade."
 			rm -rf /usr/local/$sub_board
@@ -124,7 +124,7 @@ if [ -f /tmp/ux400-local-100ge.tar.gz ]; then
 
 	tar -xf ux400-local-$sub_board1.tar.gz
 	if [ $? -eq "0" ]; then
-		diff /tmp/$sub_board1/lib/vendor-info.txt /usr/local/$sub_board1/lib/vendor-info.txt
+		diff /tmp/$sub_board1/lib/vendor-info.txt /usr/local/$sub_board1/lib/vendor-info.txt > /dev/null 2>&1
 		if [ $? -ne "0" ]; then
 			echo "$sub_board1 version different, need upgrade."
 			rm -rf /usr/local/$sub_board1
@@ -136,7 +136,7 @@ if [ -f /tmp/ux400-local-100ge.tar.gz ]; then
 			rm -rf /tmp/$sub_board1
 		fi
 
-		diff /tmp/$sub_board2/lib/vendor-info.txt /usr/local/$sub_board2/lib/vendor-info.txt
+		diff /tmp/$sub_board2/lib/vendor-info.txt /usr/local/$sub_board2/lib/vendor-info.txt > /dev/null 2>&1
 		if [ $? -ne "0" ]; then
 			echo "$sub_board2 version different, need upgrade."
 			rm -rf /usr/local/$sub_board2
@@ -160,7 +160,7 @@ if [ -f /tmp/ux400-local-v300.tar.gz ]; then
 
 	tar -xf ux400-local-$sub_board.tar.gz
 	if [ $? -eq "0" ]; then
-		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt
+		diff /tmp/$sub_board/lib/vendor-info.txt /usr/local/$sub_board/lib/vendor-info.txt > /dev/null 2>&1
 		if [ $? -ne "0" ]; then
 			echo "$sub_board version different, need upgrade."
 			rm -rf /usr/local/$sub_board
@@ -171,9 +171,9 @@ if [ -f /tmp/ux400-local-v300.tar.gz ]; then
 				if [ -f /usr/local/$sub_board.md5 ]; then
 					md5sum -c --quiet $sub_board.md5
 					if [ $? -eq "0" ]; then
-						echo "$subboard md5sum suceed."
+						echo "$sub_board md5sum suceed."
 					else
-						echo "$subboard md5sum failed."
+						echo "$sub_board md5sum failed."
 					fi
 				else
 					echo "no md5 file, needn't check."
@@ -186,10 +186,10 @@ if [ -f /tmp/ux400-local-v300.tar.gz ]; then
 			echo "$sub_board upgrade done."
 		else
 			echo "$sub_board version is the same, needn't upgrade."
-			rm -rf $subboard $subboard.md5 etc share
+			rm -rf $sub_board $sub_board.md5 etc share
 		fi
 	else
-		rm -rf $subboard $subboard.md5 etc share
+		rm -rf $sub_board $su_bboard.md5 etc share
 		echo "Bad ux400-local-$sub_board.tar.gz image, please load it again."
 	fi
 fi
