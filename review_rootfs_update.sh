@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#check priviledge
+# check priviledge
 if [ "$UID" != "0" ]; then
         echo "Failed, Please run with root priviledge."
         exit 1
@@ -10,15 +10,35 @@ cd /
 
 mount / -o remount,rw
 mount /usr/local -o remount,rw
+sync
 
-cd /tmp/
+# remove old rootfs.md5
+rm -rf /rootfs.md5
 
 if [ -f /tmp/ux400-veex-rootfs-x86.tar.gz -a -f /tmp/ux400-veex-rootfs-x86.tar.gz.md5 ]; then
+	mv /tmp/ux400-veex-rootfs-x86.tar.gz /
+	mv /tmp/ux400-veex-rootfs-x86.tar.gz.md5 /
+	sync
 	md5sum -c ux400-veex-rootfs-x86.tar.gz.md5
 	if [ $? -eq "0" ]; then
 		tar xf ux400-veex-rootfs-x86.tar.gz -C /
 		if [ $? -eq "0" ]; then
-			echo "upgrade ux400 rootfs succeed."
+			echo "tar ux400 rootfs succeed."
+			if [ -f /rootfs.md5 ]; then
+				#md5sum -c rootfs.md5
+				md5sum -c rootfs.md5 > /dev/null 2>&1
+				if [ $? -eq "0" ]; then
+					echo "check md5sum succeed."
+					echo "ux400 rootfs upgrade succeed."
+				else
+					echo "check md5sum failed"
+					mv /ux400-veex-rootfs-x86.tar.gz /tmp/
+					mv /ux400-veex-rootfs-x86.tar.gz.md5 /tmp/
+					sleep 100000
+				fi
+			else
+				echo "no rootfs.md5 file, needn't check md5sum"
+			fi
 		else
 			echo "tar ux400-veex-rootfs-x86.tar.gz failed."
 		fi
@@ -29,4 +49,6 @@ else
 	echo "no ux400-veex-rootfs-x86.tar.gz or ux400-veex-rootfs-x86.tar.gz.md5 found."
 fi
 
+mv /ux400-veex-rootfs-x86.tar.gz /tmp/
+mv /ux400-veex-rootfs-x86.tar.gz.md5 /tmp/
 
