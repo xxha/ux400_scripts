@@ -38,15 +38,17 @@ if [ -f /tmp/ux400-veex-rootfs-x86.tar.gz -a -f /tmp/ux400-veex-rootfs-x86.tar.g
 				fi
 			else
 				echo "no rootfs.md5 file, needn't check md5sum"
+				echo "ux400 rootfs upgrade succeed."
 			fi
 		else
 			echo "tar ux400-veex-rootfs-x86.tar.gz failed."
+			sleep 100000
 		fi
 	else 
 		echo "ux400-veex-rootfs-x86.tar.gz is bad, please load it again."
 	fi
 else
-	echo "no ux400-veex-rootfs-x86.tar.gz or ux400-veex-rootfs-x86.tar.gz.md5 found."
+	echo "no ux400-veex-rootfs-x86.tar.gz or ux400-veex-rootfs-x86.tar.gz.md5 found under /tmp."
 fi
 
 mv /ux400-veex-rootfs-x86.tar.gz /tmp/
