@@ -2,6 +2,7 @@
 
 #here we assume all the upgrading image are copied to /tmp/ directory.
 
+retval=0
 
 #check priviledge
 if [ "$UID" != "0" ]; then
@@ -30,6 +31,7 @@ if [ -f /tmp/ux400-local-10g.tar.gz ]; then
 		fi
 	else
 		echo "Bad ux400-local-$sub_board.tar.gz image, please load it again."
+		retval=1
 	fi
 fi
 
@@ -52,6 +54,7 @@ if [ -f /tmp/ux400-local-2p5g.tar.gz ]; then
 		fi
 	else
 		echo "Bad ux400-local-$sub_board.tar.gz image, please load it again."
+		retval=1
 	fi
 fi
 
@@ -73,6 +76,7 @@ if [ -f /tmp/ux400-local-1ge.tar.gz ]; then
 		fi
 	else
 		echo "Bad ux400-local-$sub_board.tar.gz image, please load it again."
+		retval=1
 	fi
 fi
 
@@ -94,6 +98,7 @@ if [ -f /tmp/ux400-local-40g.tar.gz ]; then
 		fi
 	else
 		echo "Bad ux400-local-$sub_board.tar.gz image, please load it again."
+		retval=1
 	fi
 fi
 
@@ -115,6 +120,7 @@ if [ -f /tmp/ux400-local-16g.tar.gz ]; then
 		fi
 	else
 		echo "Bad ux400-local-$sub_board.tar.gz image, please load it again."
+		retval=1
 	fi
 fi
 
@@ -150,9 +156,8 @@ if [ -f /tmp/ux400-local-100ge.tar.gz ]; then
 
 	else
 		echo "Bad ux400-local-$sub_board1.tar.gz image, please load it again."
+		retval=1
 	fi
-
-
 fi
 
 if [ -f /tmp/ux400-local-v300.tar.gz ]; then
@@ -174,6 +179,7 @@ if [ -f /tmp/ux400-local-v300.tar.gz ]; then
 						echo "$sub_board md5sum suceed."
 					else
 						echo "$sub_board md5sum failed."
+						retval=1
 					fi
 				else
 					echo "no md5 file, needn't check."
@@ -181,6 +187,7 @@ if [ -f /tmp/ux400-local-v300.tar.gz ]; then
 				popd
 			else
 				echo "tar $sub_board to /usr/local failed."
+				retval=1
 			fi
 			sync
 			echo "$sub_board upgrade done."
@@ -191,7 +198,9 @@ if [ -f /tmp/ux400-local-v300.tar.gz ]; then
 	else
 		rm -rf $sub_board $su_bboard.md5 etc share
 		echo "Bad ux400-local-$sub_board.tar.gz image, please load it again."
+		retval=1
 	fi
 fi
 
 echo "All sub-board upgrade done."
+return $retval

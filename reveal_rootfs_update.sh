@@ -1,5 +1,7 @@
 #!/bin/bash
 
+retval=0
+
 # check priviledge
 if [ "$UID" != "0" ]; then
         echo "Failed, Please run with root priviledge."
@@ -25,7 +27,7 @@ if [ -f /tmp/ux400-veex-rootfs-x86.tar.gz -a -f /tmp/ux400-veex-rootfs-x86.tar.g
 		if [ $? -eq "0" ]; then
 			echo "tar ux400 rootfs succeed."
 			if [ -f /rootfs.md5 ]; then
-				#md5sum -c rootfs.md5
+				#checksum rootfs
 				md5sum -c rootfs.md5 > /dev/null 2>&1
 				if [ $? -eq "0" ]; then
 					echo "check md5sum succeed."
@@ -34,7 +36,7 @@ if [ -f /tmp/ux400-veex-rootfs-x86.tar.gz -a -f /tmp/ux400-veex-rootfs-x86.tar.g
 					echo "check md5sum failed"
 					mv /ux400-veex-rootfs-x86.tar.gz /tmp/
 					mv /ux400-veex-rootfs-x86.tar.gz.md5 /tmp/
-					sleep 100000
+					retval=1
 				fi
 			else
 				echo "no rootfs.md5 file, needn't check md5sum"
@@ -42,10 +44,11 @@ if [ -f /tmp/ux400-veex-rootfs-x86.tar.gz -a -f /tmp/ux400-veex-rootfs-x86.tar.g
 			fi
 		else
 			echo "tar ux400-veex-rootfs-x86.tar.gz failed."
-			sleep 100000
+			retval=1
 		fi
 	else 
 		echo "ux400-veex-rootfs-x86.tar.gz is bad, please load it again."
+		retval=1
 	fi
 else
 	echo "no ux400-veex-rootfs-x86.tar.gz or ux400-veex-rootfs-x86.tar.gz.md5 found under /tmp."
@@ -54,3 +57,4 @@ fi
 mv /ux400-veex-rootfs-x86.tar.gz /tmp/
 mv /ux400-veex-rootfs-x86.tar.gz.md5 /tmp/
 
+return $retval
