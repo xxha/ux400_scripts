@@ -7,5 +7,11 @@ if [ "$UID" != "0" ]; then
 fi
 
 stop-v400
+sync
+
+mount / -o remount,rw
+sync
+mount /usr/local -o remount,rw
+sync
 
 echo "kill app done\n"
